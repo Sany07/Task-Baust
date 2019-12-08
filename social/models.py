@@ -5,35 +5,35 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class RecruterRegistration(models.Model):
-    first_name = models.CharField()
-    last_name = models.CharField()
-    user_name = models.CharField()
-    email = models.CharField()
-    password = models.CharField()
-    confirm_pass = models.CharField()
-    company_name = models.CharField()
-    company_url = models.URLField()
-    Profile_Pic = models.ImageField()
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    user_name = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+    password = models.CharField(max_length=200)
+    confirm_pass = models.CharField(max_length=200)
+    company_name = models.CharField(max_length=200)
+    company_url = models.URLField(max_length=200)
+    Profile_Pic = models.ImageField(max_length=200)
 
     def __str__(self):
         return self.user_name
 
 
 class CandidateRegistration(models.Model):
-    first_name = models.CharField()
-    last_name = models.CharField()
-    candidate_user_name = models.CharField()
-    email = models.CharField()
-    password = models.CharField()
-    confirm_pass = models.CharField()
-    picture_user = models.ImageField()
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    candidate_user_name = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+    password = models.CharField(max_length=200)
+    confirm_pass = models.CharField(max_length=200)
+    picture_user = models.ImageField(max_length=200)
 
     def __str__(self):
         return self.candidate_user_name
 
 
 class Category(models.Model):
-    category_name = models.CharField()
+    category_name = models.CharField(max_length=200)
 
     def __str__(self):
         return self.category_id
