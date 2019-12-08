@@ -16,11 +16,10 @@ class RecruterRegistration(models.Model):
     Profile_Pic = models.ImageField()
 
     def __str__(self):
-        return self.user_name.title()
+        return self.user_name
 
 
 class CandidateRegistration(models.Model):
-    candidate_id = models.IntegerField(primary_key=True)
     first_name = models.CharField()
     last_name = models.CharField()
     candidate_user_name = models.CharField()
@@ -30,11 +29,10 @@ class CandidateRegistration(models.Model):
     picture_user = models.ImageField()
 
     def __str__(self):
-        return self.candidate_user_name.title()
+        return self.candidate_user_name
 
 
 class Category(models.Model):
-    category_id = models.IntegerField(primary_key=True)
     category_name = models.CharField()
 
     def __str__(self):
@@ -43,7 +41,7 @@ class Category(models.Model):
 
 class CandidateProfile(models.Model):
     candidate_pro_id = models.ForeignKey(CandidateRegistration, on_delete=models.CASCADE)
-    candidate_category_id = models.ForeignKey(Candidate_registration, on_delete=models.CASCADE)
+    candidate_category_id = models.ForeignKey(CandidateRegistration, on_delete=models.CASCADE)
     objective = models.TextField()
     education = models.TextField()
     personal_info = models.TextField()
