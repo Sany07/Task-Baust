@@ -2,6 +2,7 @@ from django.shortcuts import render,get_object_or_404,redirect
 from .models import CandidateProfile
 from .form import candidateRegistrationForm , CreateCvForm
 from django.contrib import auth
+from django.contrib import messages
 from django.contrib.auth import get_user_model
 User=get_user_model()
 
@@ -65,6 +66,9 @@ def userCv(request):
                 instance=form.save(commit=False)
                 instance.candidate=user
                 instance.save()
+                messages.success(request, 'Job Profile created successfully.')
+            else:
+                messages.error(request,form.errors)
             context={
                 'form':form
             }  

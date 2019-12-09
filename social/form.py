@@ -18,8 +18,6 @@ class candidateRegistrationForm(UserCreationForm):
             'password2'
         ]
 
-
-
 class CreateCvForm(forms.ModelForm):
 
     class Meta:
@@ -27,9 +25,12 @@ class CreateCvForm(forms.ModelForm):
         model=CandidateProfile
 
         fields =[
+            
             'candidate_category',
             'education',
             'personal_info',
+            'website',
+            'cv',
             'profile_pic',
  
 

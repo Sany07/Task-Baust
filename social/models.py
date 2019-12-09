@@ -31,7 +31,8 @@ class CandidateProfile(models.Model):
     profile_pic= models.ImageField(upload_to='profile_pics' , blank=True , null= True)
     education = models.TextField()
     personal_info = models.TextField()
-
+    cv = models.FileField(upload_to='pdf' ,blank=True , null= True)
+    website = models.URLField(blank=True , null= True)
 
     def __str__(self):
         return self.candidate.username
