@@ -19,17 +19,17 @@ class RecruterRegistration(models.Model):
         return self.user_name
 
 
-class CandidateRegistration(models.Model):
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
-    candidate_user_name = models.CharField(max_length=200)
-    email = models.CharField(max_length=200)
-    password = models.CharField(max_length=200)
-    confirm_pass = models.CharField(max_length=200)
-    picture_user = models.ImageField(max_length=200)
+# class CandidateRegistration(models.Model):
+#     first_name = models.CharField(max_length=200)
+#     last_name = models.CharField(max_length=200)
+#     candidate_user_name = models.CharField(max_length=200)
+#     email = models.CharField(max_length=200)
+#     password1 = models.CharField(max_length=200)
+#     password2 = models.CharField(max_length=200)
+#     picture_user = models.ImageField(max_length=200)
 
-    def __str__(self):
-        return self.candidate_user_name
+#     def __str__(self):
+#         return self.candidate_user_name
 
 
 class Category(models.Model):
