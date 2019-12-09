@@ -1,7 +1,7 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth.models import User
 from django import forms
-# from .models import Blogpost
+from .models import CandidateProfile
 
 class candidateRegistrationForm(UserCreationForm):
 
@@ -20,20 +20,21 @@ class candidateRegistrationForm(UserCreationForm):
 
 
 
-# class CreatePostForm(forms.ModelForm):
+class CreateCvForm(forms.ModelForm):
 
-#     class Meta:
+    class Meta:
 
-#         model=Blogpost
+        model=CandidateProfile
 
-#         fields =[
-#             'title',
-#             'post',
-#             'image',
-#             'catagories',
-#             'previous_post',
-#             'next_post',
-
+        fields =[
+            'candidate_category',
+            'education',
+            'personal_info',
+            'profile_pic',
+ 
 
 
-#         ]
+
+        ]
+
+

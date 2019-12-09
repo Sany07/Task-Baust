@@ -13,24 +13,10 @@ class RecruterRegistration(models.Model):
     confirm_pass = models.CharField(max_length=200)
     company_name = models.CharField(max_length=200)
     company_url = models.URLField(max_length=200)
-    Profile_Pic = models.ImageField(max_length=200)
+    Profile_Pic = models.ImageField(upload_to='Recruter')
 
     def __str__(self):
         return self.user_name
-
-
-# class CandidateRegistration(models.Model):
-#     first_name = models.CharField(max_length=200)
-#     last_name = models.CharField(max_length=200)
-#     candidate_user_name = models.CharField(max_length=200)
-#     email = models.CharField(max_length=200)
-#     password1 = models.CharField(max_length=200)
-#     password2 = models.CharField(max_length=200)
-#     picture_user = models.ImageField(max_length=200)
-
-#     def __str__(self):
-#         return self.candidate_user_name
-
 
 class Category(models.Model):
     category_name = models.CharField(max_length=200)
@@ -42,17 +28,13 @@ class Category(models.Model):
 class CandidateProfile(models.Model):
     candidate =  models.OneToOneField(User, on_delete=models.CASCADE)
     candidate_category = models.ForeignKey(Category,related_name='CandidateRegistration' , on_delete=models.CASCADE)
-    objective = models.TextField()
+    profile_pic= models.ImageField(upload_to='profile_pics' , blank=True , null= True)
     education = models.TextField()
     personal_info = models.TextField()
-    projects = models.TextField()
-    technical_skill = models.TextField()
-    language = models.TextField()
-    awards = models.TextField()
-    membership = models.TextField()
-    interest = models.TextField()
-    hobbies = models.TextField()
-    personal_qualities = models.TextField()
+
 
     def __str__(self):
-        return self.candidate_category_id
+        return self.candidate.username
+
+
+    

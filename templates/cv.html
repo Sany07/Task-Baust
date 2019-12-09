@@ -1,0 +1,18 @@
+
+	<!-- Hero section start -->
+
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8">
+
+					<form method="POST" enctype="multipart/form-data">
+							{% csrf_token %}
+						{{ form.as_p }}
+					
+						<button type="submit">Create CV</button>
+					</form>
+           		</div>
+        	</div>
+		</div>
+
+    
