@@ -65,7 +65,7 @@ class Ratings(models.Model):
 
 
 def __str__(self):
-    return self.rate
+    return self.post
 
 #
 # class RecruterRegistration(models.Model):
