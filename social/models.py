@@ -15,8 +15,6 @@ class Category(models.Model):
 class Skills(models.Model):
     skills = TaggableManager()
 
-    def __str__(self):
-        return self.skills
 
 
 class CandidateProfile(models.Model):
