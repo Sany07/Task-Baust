@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="style1.css">
+<style>
+html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
+</style>
+<body class="w3-theme-l5">
+
+
+
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+  <!-- The Grid -->
+
+  <div class="w3-row">
+    <!-- Left Column -->
+    
+    <!-- Middle Column -->
+    <div class="w3-col m7">
+    
+      
+      
+      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+        <img src="back.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+        <span class="w3-right w3-opacity">32 min</span>
+        <h4>Malamal</h4><br>
+        <hr class="w3-clear">
+        <p>Have you seen this?</p>
+        <img src="back.jpg" style="width:100%" class="w3-margin-bottom">
+        <p>aavdshasddvsvdvsddhvajdvjadv</p>
+    <div class="rate">
+        <input type="radio" id="star5" name="rate" value="5" /><label for="star5" title="text">5 stars</label>
+        <input type="radio" id="star4" name="rate" value="4" /><label for="star4" title="text">4 stars</label>
+        <input type="radio" id="star3" name="rate" value="3" /><label for="star3" title="text">3 stars</label>
+        <input type="radio" id="star2" name="rate" value="2" /><label for="star2" title="text">2 stars</label>
+        <input type="radio" id="star1" name="rate" value="1" /><label for="star1" title="text">1 star</label>
+    </div>
+      </div> 
+    </div>
+  </div>
+<!-- End Page Container -->
+</div>
+<br>
+
+
+<script>
+// Accordion
+function myFunction(id) {
+  var x = document.getElementById(id);
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+    x.previousElementSibling.className += " w3-theme-d1";
+  } else { 
+    x.className = x.className.replace("w3-show", "");
+    x.previousElementSibling.className = 
+    x.previousElementSibling.className.replace(" w3-theme-d1", "");
+  }
+}
+
+// Used to toggle the menu on smaller screens when clicking on the menu button
+function openNav() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+
+</body>
+</html> 
