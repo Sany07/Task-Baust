@@ -16,7 +16,7 @@ class Skills(models.Model):
     skills = TaggableManager()
 
     def __str__(self):
-        return self.id
+        return self.skills
 
 
 class CandidateProfile(models.Model):
