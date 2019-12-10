@@ -1,16 +1,26 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
 
-	<!-- Hero section start -->
+	<div class="main">
+	
 
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8">
+	     <center> 
+		     <div class="">
+				
+					<form method="POST" enctype="multipart/form-data">
+						{% csrf_token %}
+					{{ form.as_p }}
+				
+					<button type="submit">Create CV</button>
+				</form>
 
-					<form method="POST">
-							{% csrf_token %}
-						{{ form.as_p }}
-					
-						<button type="submit">Register</button>
-					</form>
-           		</div>
-        	</div>
+		 
 		</div>
+	
+		</center> 
+
+</div>
+
+
+{% endblock %}
