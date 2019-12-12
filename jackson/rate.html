@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<script language="javascript">
+
+function rating() 
+{ 
+    user=5; //from datrabase
+    total_rating=50; //from database
+    rate=total_rating/user;
+    document.write("the rating is" +rate); 	
+}
+</script>
+<body>
+	<form>
+	Enter the rating(1-5): <br>
+    <input type="text" id="first" /><br>
+    <input type="button" onClick="rating()" Value="Ok" />
+    <br>
+    </form>
+</body>
+</html>
