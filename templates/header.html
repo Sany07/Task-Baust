@@ -1,39 +1,44 @@
-<!-- 
-<div class="headerx">
-</div>
-<div class="header">
-    <div id="logo" class="header"> <img src="logo.png" /> </div>
-    <div id="form1" class="header">
-        <input type="mail" style="height:25px; width:200px;" name="email" placeholder="Email or phone number" />
+{% load static %}
+
+<!-- <div class="header">
+    <div id="logo" class="header"> 
+            <a href="{% url 'home' %}"><img src="{% static 'img/lc.png' %}" /> </a>
+
+       
+
     </div>
-    <div id="form2" class="header">
-        <input type="password" style="height:25px; width:200px;" name="email" placeholder="Password" /><br>
-        <div id="forget">forget password?</div>
-    </div>
-    <div id="submit1" class="header">
-    <input type="submit" id="submit1" value="Sign in" />
-    </div>
+
+    <a href="{% url 'login' %}">LogIn</a>
+    <a href="{% url 'register' %}">About Us</a>
 </div> -->
 
-
-
 <div class="w3-top">
-        <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-         <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-         <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Logo</a>
-         <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-globe"></i></a>
-         <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
-         <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
-         <div class="w3-dropdown-hover w3-hide-small">
-           <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>     
-           <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-             <a href="#" class="w3-bar-item w3-button">One new friend request</a>
-             <a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a>
-             <a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
-           </div>
-         </div>
-         <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
-           <img src="C:\Users\USER\Desktop\jackson\CSEL4T2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar">
-         </a>
-        </div>
-       </div>
+    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+     
+     
+     
+    <a href="{% url 'home' %}" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Recruiter</a>
+    {% if user.is_authenticated %}
+    
+    <a href="{% url 'logout' %}" class="w3-bar-item w3-button w3-hide-small  w3-right w3-padding-large w3-hover-white" >Logout</a>
+
+    {% else %}
+    <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-hide-small  w3-right w3-padding-large w3-hover-white" >Login</a>
+    <a href="{% url 'register' %}" class="w3-bar-item w3-button w3-hide-small  w3-right w3-padding-large w3-hover-white" >Register</a>
+    
+    {% endif %}
+
+    <a href="{% url 'post' %}" class="w3-bar-item w3-button w3-hide-small  w3-right w3-padding-large w3-hover-white" >Job Post</i></a>
+    
+    
+    </div>
+   </div>
+   
+   <!-- Navbar on small screens -->
+   <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+     <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+     <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+     <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+     <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+   </div>
+   

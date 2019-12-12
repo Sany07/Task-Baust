@@ -1,3 +1,227 @@
-<h1>profile
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+
+
+<!-- <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bootstrap Blog - B4 Template by Bootstrap Temple</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/pro.css' %}">
+    <link rel="shortcut icon" href="favicon.png">
+  </head>
+  <body>
+        <div class="header">
+                <div id="logo" class="header"> <a href="{% url 'home' %}"> <img src="{% static 'img/lc.png' %}" /> </a></div>
+            </div> -->
+            
+        {% if profile %}
+
+        {% block content %}
+ 
+
+  
+        
+        
+        <br>
+        <br>
+        <br>
+        <br>
+        
+        <div class="row imgcenter">
     
-</h1>
+        
+            <div class="column">
+                <div class="card">
+                <div class="" style="padding:30px;">
+                
+                <img src="{{ profile.profile_pic.url }}" alt="Avatar" class="imgcenter w3-center w3-circle w3-margin-left" style="width:115px;height:115px ">
+                <div class="container"   style="max-width:90% !important; ">
+                <h2>{{ profile.candidate.first_name }} {{ profile.candidate.last_name }}</h2>
+            </div>
+        </div>
+                <div class="padding_l">
+       
+                        <div class="row  po">
+                            <div class="col-md-6 w3-left">
+                                <label>Name :</label>
+                            </div>
+                            <div class="col-md-6 w3-left mpleft" style="text-align:left;">
+                                <h7 class="db">{{ profile.candidate.first_name }} {{ profile.candidate.last_name }}</h7>
+                            </div>
+                        </div>
+                        <div class="row po">
+                            <div class="col-md-6 w3-left">
+                                <label>Email :</label>
+                            </div>
+                            <div class="col-md-6 w3-left mpleft"  style="text-align:left;">
+                                <h7 class="db"><a href = "mailto: {{ profile.candidate.email }}">{{ profile.candidate.email }}</a></h7>
+                            </div>
+                        </div>
+                        <div class="row  po">
+                                <div class="col-md-6 w3-left ">
+                                    <label>Website :</label>
+                                </div>
+                                <div class="col-md-6 w3-left mpleft"  style="text-align:left;">
+                                    <h7 class="db"> <a href="{{ profile.website }}">{{ profile.website }}</a></h7>
+                                </div>
+                            </div>
+                            {% if profile.cv %}    
+                            <div class="row po">
+                                    <div class="col-md-6 w3-left pm">
+                                        <label>Cv Link :</label>
+                                    </div>
+                                    <div class="col-md-6 w3-left mpleft " style="text-align:left;">
+                                        <h7><a href="{{ profile.cv.url }}">{{ profile.candidate.first_name }}_{{ profile.candidate.last_name }}_Cv.pdf</a><br/></h7>
+                                    </div>
+                                </div>
+                        {% endif %}  
+
+
+                        <div class="row po">
+                            
+                                <div class="col-md-6 w3-left pm">
+                                    <label>Skills :</label>
+                                </div>
+                                <div class="col-md-6 w3-left mpleft">
+                                    {% for skill in profile.skills.all  %}
+                                    <div class="">
+                                            
+                                                                            
+                                            <h7 class="sk">{{ skill.name }} |</h7>
+                                    </div>     
+                                    {% endfor %}
+                                
+                                </div>   
+                           
+                        </div>                
+                </div>
+                </div>
+                </div>
+                </div>
+    
+        
+    
+        <style>
+            html {
+            box-sizing: border-box;
+            }
+            
+            , :before, *:after {
+            box-sizing: inherit;
+            }
+            .po {
+
+padding: 18px;
+
+}
+
+.padding_l {
+
+padding: 18px;
+margin-left: 40px
+
+}
+     
+            .mpleft {
+
+            margin-left: 131px;
+
+}
+            .imgcenter{
+              display: block;
+              margin-right: auto;
+              margin-left: auto !important;
+            
+            }
+      
+            .hcenter{
+              display: block;
+              padding: 33px;
+              
+            }
+            .sk{
+              display: block;
+             float:left;
+              
+             padding-left:5px;
+            
+            }
+      
+            
+            .skill_{
+              /* text-align: center; */
+              padding: 10px;
+              position: relative;
+              display: inline-block;
+            
+            }
+      
+            .column {
+            display:inline;
+            width: 33.3%;
+            margin-bottom: 16px;
+            padding: 0 8px;
+            text-align:center;
+      
+            }
+
+            .w3-left {
+    width: 201px !important;
+}
+            
+            @media screen and (max-width: 650px) {
+            .column {
+            width: 100%;
+            display: block;
+            }
+            }
+            
+            .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            }
+            
+            .container {
+            padding: 0 16px;
+            }
+            
+            .container::after, .row::after {
+            content: "";
+            clear: both;
+            display: table;
+            }
+            
+            .title {
+            color: grey;
+            }
+            
+            .button {
+            border: none;
+            outline: 0;
+            display: inline-block;
+            padding: 8px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            }
+            
+            .button:hover {
+            background-color: #555;
+            }
+            </style>
+        
+        {% endblock %}
+        
+            {% endif %} 
+      <!-- </body>
+    </html> -->

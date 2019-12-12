@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from taggit.managers import TaggableManager
+from django.urls import reverse
 User=get_user_model()
 # Create your models here.
 
@@ -30,6 +31,12 @@ class CandidateProfile(models.Model):
     def __str__(self):
         return self.candidate.username
 
+    def get_absolute_url(self):
+        return reverse('profile',kwargs={
+
+            'id':self.id
+        })
+
 class RecruiterProfile(models.Model):
     recruiter = models.ForeignKey(User, on_delete=models.CASCADE)
     company_pic = models.ImageField(upload_to='profile_pics', blank=True, null=True)
@@ -38,7 +45,11 @@ class RecruiterProfile(models.Model):
 
     def __str__(self):
         return self.recruiter.username
+    # def get_absolute_url(self):
+    #     return reverse('singlepost',kwargs={
 
+    #         'id':self.id
+    #     })
 
 class Blogpost(models.Model):
     author = models.ForeignKey(RecruiterProfile, on_delete=models.CASCADE)
@@ -47,10 +58,18 @@ class Blogpost(models.Model):
     image = models.ImageField(upload_to='blog_image')
     website = models.URLField(blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
+    likes= models.ManyToManyField(User, blank=True, related_name='post_likes')
 
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('singlepost',kwargs={
+
+            'id':self.id
+        })
+    def get_like_url(self):
+        return reverse("post:like_toggle", kwargs={"id": self.id})
 
 class Ratings(models.Model):
     candidate = models.ForeignKey(CandidateProfile, related_name='CandidateId', on_delete=models.CASCADE)

@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+  {% block content %}
+ 
+
+  {% if query %}
+  
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  
+  <div class="row imgcenter">
+      <h2 class="hcenter">Search Result</h2>
+      {% for profile in profile_list %}
+          <div class="column">
+          <div class="card">
+          <div class="" style="padding:30px;">
+          
+          <img src="{{ profile.profile_pic.url }}" alt="Avatar" class="imgcenter w3-center w3-circle w3-margin-left" style="width:115px;height:115px ">
+          <div class="container">
+          <h2>{{ profile.candidate.first_name }} {{ profile.candidate.last_name }}</h2>
+        <div class="skill_">
+          {% for skill in profile.skills.all  %}
+                                            
+          <h7 class="sk">{{ skill.name }}</h7>
+       
+          {% endfor %}
+        </div>
+          <a href="{% url 'profile' profile.id %}"><button class="button">Contact</button></a>
+          </div>
+          </div>
+          </div>
+          </div>
+      {% endfor %}
+  </div>
+  {% endif %}
+  <style>
+      html {
+      box-sizing: border-box;
+      }
+      
+      , :before, *:after {
+      box-sizing: inherit;
+      }
+
+
+      .imgcenter{
+        display: block;
+        margin-right: auto;
+        margin-left: auto !important;
+      
+      }
+
+      .hcenter{
+        display: block;
+        padding: 33px;
+        
+      }
+      .sk{
+        display: block;
+       float:left;
+        
+       padding-left:5px;
+      
+      }
+
+      
+      .skill_{
+        text-align: center;
+        padding: 10px;
+        position: relative;
+        display: inline-block;
+      
+      }
+
+      .column {
+      float: left;
+      width: 33.3%;
+      margin-bottom: 16px;
+      padding: 0 8px;
+      text-align:center;
+
+
+
+      }
+      
+      @media screen and (max-width: 650px) {
+      .column {
+      width: 100%;
+      display: block;
+      }
+      }
+      
+      .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      }
+      
+      .container {
+      padding: 0 16px;
+      }
+      
+      .container::after, .row::after {
+      content: "";
+      clear: both;
+      display: table;
+      }
+      
+      .title {
+      color: grey;
+      }
+      
+      .button {
+      border: none;
+      outline: 0;
+      display: inline-block;
+      padding: 8px;
+      color: white;
+      background-color: #000;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+      }
+      
+      .button:hover {
+      background-color: #555;
+      }
+      </style>
+  
+  {% endblock %}
+

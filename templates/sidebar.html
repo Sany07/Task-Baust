@@ -1,0 +1,58 @@
+{% load static %}
+
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+    <!-- The Grid -->
+    <div class="w3-row">
+      <!-- Left Column -->
+      <div class="w3-col m3">
+        <!-- Profile -->
+        
+            {% if recruiter_profile %} 
+              {% for obj in recruiter_profile %}
+                  <div class="w3-card w3-round w3-white">
+                    <div class="w3-container">
+                   
+                    <p class="w3-center">
+                        <img src="{{ obj.company_pic.url }}" class="w3-circle" style="height:200px;width:200px" alt="Avatar">
+                    </p>
+                    <hr>
+                    <h4 class="w3-center"> {{ obj|upper  }} </h4>
+                    <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> {{ obj.company_name  }}</p>
+                    <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{ obj.website  }} </p>
+                    </div>
+                  </div>
+                {% endfor %}
+            {% endif %}    
+            {% if candidate_profile %} 
+  
+                    {% for obj in candidate_profile %}
+                        <div class="w3-card w3-round w3-white">
+                          <div class="w3-container">
+                        
+                          <p class="w3-center">
+                              <img src="{{ obj.profile_pic.url }}" class="w3-circle" style="height:200px;width:200px" alt="Avatar">
+                          </p>
+                          <hr>
+                          <h4 class="w3-center"> {{ obj|upper  }} </h4>
+                          <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> {{ obj.personal_info  }}</p>
+                          <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{ obj.website  }} </p>
+                          </div>
+                        </div>
+                      {% endfor %}
+           {% endif %} 
+           
+           {% if is_authenticated and not candidate_profile or not recruiter_profile  %}  
+            
+           <div class="w3-card w3-round w3-white">
+               <div class="w3-container">
+                   <p class="w3-center">
+                       <img src="back.jpg" class="w3-circle" style="height:200px;width:200px" alt="Avatar">
+                       </p>
+               <p class="w3-center">
+                   <a href="{% url 'select' %}"><h3>Update Your Profile</h3></a>
+               </p>
+               <hr>
+               
+               </div>
+             </div>
+            {% endif %} 

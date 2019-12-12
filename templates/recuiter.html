@@ -1,6 +1,22 @@
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }} 
+{% extends 'base.html' %}
+{% block content %}
 
-<button type="submit">Create Profile</button>
-</form>
+{% load crispy_forms_tags %}
+
+  <div class="login-page">
+  <div class="form">
+        <form method="POST" class="login-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+        
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+      <!-- <p class="message">Not registered? <a href="#">Create an account</a></p> -->
+    </form>
+  </div>
+</div>
+  </div>
+
+
+
+{% endblock %}

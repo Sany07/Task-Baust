@@ -1,23 +1,22 @@
-
 {% extends 'base.html' %}
-
 {% block content %}
 
+{% load crispy_forms_tags %}
 
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8">
+  <div class="login-page">
+  <div class="form">
+        <form method="POST" class="login-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+        
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+      <!-- <p class="message">Not registered? <a href="#">Create an account</a></p> -->
+    </form>
+  </div>
+</div>
+  </div>
 
-					<form method="POST" enctype="multipart/form-data">
-							{% csrf_token %}
-						{{ form.as_p }}
-					
-						<button type="submit">Create CV</button>
-					</form>
-           		</div>
-        	</div>
-		</div>
 
-    
 
 {% endblock %}
