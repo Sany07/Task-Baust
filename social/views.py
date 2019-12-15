@@ -42,8 +42,6 @@ def home(request):
     post_list=Blogpost.objects.order_by('-timestamp')
     post_count=Blogpost.objects.all().count()
     candidate_profile = CandidateProfile.objects.filter(candidate=request.user.id)
-
-   
     context={
         'post_list' : post_list,
         'post_count':post_count,
@@ -55,7 +53,6 @@ def home(request):
         recruiter_profile = RecruiterProfile.objects.filter(recruiter=user.id)
 
         if recruiter_profile:
-
             post_list=Blogpost.objects.filter(author=recruiter_profile[0])
             post_count=Blogpost.objects.filter(author=recruiter_profile[0]).count()
 
