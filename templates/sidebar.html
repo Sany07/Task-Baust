@@ -44,8 +44,8 @@
            
            
            {% if not candidate_profile %}  
-           {% if not recruiter_profile  %}  
-           {% if is_authenticated %}  
+              {% if not recruiter_profile  %}  
+              {% if request.user.is_authenticated %}  
            <div class="w3-card w3-round w3-white">
                <div class="w3-container">
                    <p class="w3-center">
@@ -58,6 +58,8 @@
                
                </div>
              </div>
+              {% endif %} 
             {% endif %} 
             {% endif %} 
-            {% endif %} 
+
+     
