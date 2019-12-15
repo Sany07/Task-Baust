@@ -71,5 +71,3 @@ class userBlogPost(forms.ModelForm):
 
         ]
 
-
-

@@ -19,9 +19,9 @@
               <a href="{{ get_like_url }}like">Like </a>
              
               {% endif %}
-            
+              
           </span>
-        <h4><b>{{ post.author.recruiter.username }}</b></h4><h7><a href="{{ post.website }}">{{ post.website }}</a></h7>
+          <a href="{% url 'rprofile' post.author.id %}"><h4><b>{{ post.author.recruiter.username|upper }}</b></h4></a><h7><a href="{{ post.website }}">{{ post.website }}</a></h7>
         <div>
         	<h3>{{ post.title }}</h3>
         </div>
@@ -37,11 +37,11 @@
               <img src="back1.jpg" style="width:100%" alt="Nature" class="w3-margin-bottom">
           </div> -->
         </div>
-        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"></i>*</button>
+        <!-- <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"></i>*</button>
         <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"></i>**</button>
         <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"></i>***</button>
         <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"></i>****</button>
-        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"></i>*****</button> 
+        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"></i>*****</button>  -->
 
         
       </div>

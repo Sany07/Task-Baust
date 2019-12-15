@@ -9,22 +9,21 @@
         <br>
         <br>
         <br>
-        
         <div class="row imgcenter">
     
         
             <div class="column">
                 <div class="card">
                 <div class="" style="padding:30px;">
-                
-                <img src="{{ profile.profile_pic.url }}" alt="Avatar" class="imgcenter w3-center w3-circle w3-margin-left" style="width:115px;height:115px ">
-                
-                {% if profile.candidate.username == request.user.username %}  
-                    <h6><a href="{% url 'updateprofile' profile.id %}">Edit</a></h6>
-                    <h6><a href="{% url 'profiledelete' profile.id %}">Delete</a></h6>
+            {% if profile.company_pic %} 
+                <img src="{{ profile.company_pic.url }}" alt="Avatar" class="imgcenter w3-center w3-circle w3-margin-left" style="width:115px;height:115px ">
+                {% endif %}    
+                {% if profile.recruiter.username == request.user.username %}  
+                    <h6><a href="{% url 'rupdateprofile' profile.id %}">Edit</a></h6>
+                    <h6><a href="{% url 'rprofiledelete' profile.id %}">Delete</a></h6>
                 {% endif %} 
                 <div class="container"   style="max-width:90% !important; ">
-                <h2>{{ profile.candidate.first_name }} {{ profile.candidate.last_name }}</h2>
+                <h2>{{ profile.company_name }}</h2>
             </div>
         </div>
                 <div class="padding_l">
@@ -34,7 +33,7 @@
                                 <label>Name :</label>
                             </div>
                             <div class="col-md-6 w3-left mpleft" style="text-align:left;">
-                                <h7 class="db">{{ profile.candidate.first_name }} {{ profile.candidate.last_name }}</h7>
+                                <h7 class="db">{{ profile.recruiter.first_name }} {{ profile.recruiter.last_name }}</h7>
                             </div>
                         </div>
                         <div class="row po">
@@ -42,7 +41,7 @@
                                 <label>Email :</label>
                             </div>
                             <div class="col-md-6 w3-left mpleft"  style="text-align:left;">
-                                <h7 class="db"><a href = "mailto: {{ profile.candidate.email }}">{{ profile.candidate.email }}</a></h7>
+                                <h7 class="db"><a href = "mailto: {{ profile.recruiter.email }}">{{ profile.recruiter.email }}</a></h7>
                             </div>
                         </div>
                         <div class="row  po">
@@ -52,64 +51,11 @@
                                 <div class="col-md-6 w3-left mpleft"  style="text-align:left;">
                                     <h7 class="db"> <a href="{{ profile.website }}">{{ profile.website }}</a></h7>
                                 </div>
-                            </div>
-                            {% if profile.cv %}    
-                            <div class="row po">
-                                    <div class="col-md-6 w3-left pm">
-                                        <label>Cv Link :</label>
-                                    </div>
-                                    <div class="col-md-6 w3-left mpleft " style="text-align:left;">
-                                        <h7><a href="{{ profile.cv.url }}">{{ profile.candidate.first_name }}_{{ profile.candidate.last_name }}_Cv.pdf</a><br/></h7>
-                                    </div>
-                                </div>
-                        {% endif %}  
-
-
-                        <div class="row po">
-                            
-                                <div class="col-md-6 w3-left pm">
-                                    <label>Skills :</label>
-                                </div>
-                                <div class="col-md-6 w3-left mpleft">
-                                    {% for skill in profile.skills.all  %}
-                                    <div class="">
-                                            
-                                                                            
-                                            <h7 class="sk">{{ skill.name }} |</h7>
-                                    </div>     
-                                    {% endfor %}
-                                
-                                </div>   
-                           
-                        </div>                
+                            </div>              
                 </div>
                 </div>
                 </div>
-                <div class="column">
-                        <div class="card">
-                        <div class="padding_l">
-               
-                                <div class="row  po">
-                                    <div class="col-md-6 w3-left">
-                                        <label>Education :</label>
-                                    </div>
-                                    <div class="col-md-6 w3-left mpleft" style="text-align:left;">
-                                        <h7 class="db">{{ profile.education }}</h7>
-                                    </div>
-                                </div>
-
-                                <div class="row  po">
-                                        <div class="col-md-6 w3-left ">
-                                            <label>Bio :</label>
-                                        </div>
-                                        <div class="col-md-6 w3-left mpleft"  style="text-align:left;">
-                                            <h7 class="db"> {{ profile.personal_info }}</h7>
-                                        </div>
-                                    </div>
                 
-                        </div>
-                        </div>
-                        </div>
                 </div>
     
         

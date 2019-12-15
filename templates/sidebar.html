@@ -11,12 +11,13 @@
               {% for obj in recruiter_profile %}
                   <div class="w3-card w3-round w3-white">
                     <div class="w3-container">
-                   
+                    {% if obj.company_pic %} 
                     <p class="w3-center">
                         <img src="{{ obj.company_pic.url }}" class="w3-circle" style="height:200px;width:200px" alt="Avatar">
                     </p>
+                    {% endif %} 
                     <hr>
-                    <h4 class="w3-center"> {{ obj|upper  }} </h4>
+                    <a href="{% url 'rprofile' obj.id %}"><h4 class="w3-center"> {{ obj|upper  }}</h4></a>
                     <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> {{ obj.company_name  }}</p>
                     <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{ obj.website  }} </p>
                     </div>
@@ -33,7 +34,7 @@
                               <img src="{{ obj.profile_pic.url }}" class="w3-circle" style="height:200px;width:200px" alt="Avatar">
                           </p>
                           <hr>
-                          <h4 class="w3-center"> {{ obj|upper  }} </h4>
+                          <a href="{% url 'profile' obj.id %}"><h4 class="w3-center"> {{ obj|upper  }}</h4></a>
                           <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> {{ obj.personal_info  }}</p>
                           <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{ obj.website  }} </p>
                           </div>
@@ -41,8 +42,10 @@
                       {% endfor %}
            {% endif %} 
            
-           {% if is_authenticated and not candidate_profile or not recruiter_profile  %}  
-            
+           
+           {% if not candidate_profile %}  
+           {% if not recruiter_profile  %}  
+           {% if is_authenticated %}  
            <div class="w3-card w3-round w3-white">
                <div class="w3-container">
                    <p class="w3-center">
@@ -55,4 +58,6 @@
                
                </div>
              </div>
+            {% endif %} 
+            {% endif %} 
             {% endif %} 

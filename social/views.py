@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from taggit.models import Tag
 from django.db.models import Q
+from django.urls import reverse
 from django.views.generic import RedirectView
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
@@ -23,11 +24,9 @@ def search(request):
     if query:
         search_profile_list= search_profile_list.filter(
             Q(skills__slug__icontains=query) |
-            Q(education__icontains=query)|
-            Q(website__icontains=query)
+            Q(candidate__email__icontains=query)|
+            Q(candidate__username__icontains=query)
         ).distinct()
-        print('query')
-        print(search_profile_list)
 
     context={
 
@@ -41,24 +40,34 @@ def search(request):
 def home(request):
     
     post_list=Blogpost.objects.order_by('-timestamp')
+    post_count=Blogpost.objects.all().count()
+    candidate_profile = CandidateProfile.objects.filter(candidate=request.user.id)
 
-
+   
     context={
         'post_list' : post_list,
+        'post_count':post_count,
+        'candidate_profile':candidate_profile,
+
     }
     if request.user.is_authenticated:
         user = get_object_or_404(User , id=request.user.id)
         recruiter_profile = RecruiterProfile.objects.filter(recruiter=user.id)
-        candidate_profile = CandidateProfile.objects.filter(candidate=user.id)
 
-        context={
-                    'post_list':post_list,
-                    'recruiter_profile':recruiter_profile,
-                    'candidate_profile':candidate_profile,
+        if recruiter_profile:
 
-                }
+            post_list=Blogpost.objects.filter(author=recruiter_profile[0])
+            post_count=Blogpost.objects.filter(author=recruiter_profile[0]).count()
+
+
+            context={
+                        'post_list':post_list,
+                        'recruiter_profile':recruiter_profile,
+                        'post_count':post_count,
+
+                    }
       
-        return render(request , 'index.html',context)
+            return render(request , 'index.html',context)
 
     return render(request , 'index.html',context)
 
@@ -95,7 +104,22 @@ def logIn(request):
             user=auth.authenticate(request,username=username,password=password)
             if user is not None:
                 auth.login(request ,user)
-                return redirect('home')
+                    
+                user = get_object_or_404(User , id=request.user.id)
+                recruiter_profile = RecruiterProfile.objects.filter(recruiter=user.id)
+                candidate_profile = CandidateProfile.objects.filter(candidate=user.id)
+                print('user')
+                print(user)
+                print(candidate_profile)
+
+
+                # if not recruiter_profile:
+                #     return redirect('select')
+                if candidate_profile or recruiter_profile:
+                    return redirect('home')
+                    
+                else:
+                    return redirect('select')
     return render(request,'login.html')
 
 
@@ -193,21 +217,6 @@ def blogPost(request):
             return render(request,'blogpost.html',context)
 
 
-# ###################### Post ###################
-
-# def post(request,id):
-    
-    
-#     post_list=get_object_or_404(Blogpost,pk=id)
-#     latest_post_list=Blogpost.objects.order_by('-timestamp')[0:3]
- 
-    
-#     context={
-#         'post' :post_list,
-#         'latest_post_list':latest_post_list,
-       
-#     }
-#     return render(request , 'post.html',context)
 
 ###################### Profile ###################
 
@@ -222,8 +231,64 @@ def userprofile(request,id):
     }
 
     return render(request,'profile.html',context)
+    
+###################### RecruiterProfile Profile ###################
+def rp(request,id):
+   
+    profile = get_object_or_404(RecruiterProfile , id=id)
+
+    
+    context={
+        'profile': profile,
+ 
+    }
+
+    return render(request,'rprofile.html',context)
+
+###################### Update Profile ###################
+
+@login_required
+def updateprofile(request,id):
+    if request.user.is_authenticated:
+        user=get_object_or_404(CandidateProfile,candidate=request.user.id)
+        profile = get_object_or_404(CandidateProfile , id=id)
+    form=CreateCvForm(request.POST or None , request.FILES or None , instance=profile)
+    
+    if request.method=='POST':
+        if form.is_valid():
+            instance=form.save(commit=False)
+            instance.author=user
+            instance.save()
+           
+            return redirect(reverse("profile" ,kwargs={
+                'id':form.instance.id
+        }))
+    context={
+        'form':form
+    }
+    return render(request,'cv.html',context)
 
 
+@login_required
+def rupdateprofile(request,id):
+    if request.user.is_authenticated:
+        user=get_object_or_404(RecruiterProfile,recruiter=request.user.id)
+        profile = get_object_or_404(RecruiterProfile , id=id)
+    form=RecruiterProfileForm(request.POST or None , request.FILES or None , instance=profile)
+    
+    if request.method=='POST':
+        if form.is_valid():
+            instance=form.save(commit=False)
+            instance.author=user
+            instance.save()
+           
+            return redirect(reverse("rprofile" ,kwargs={
+                'id':form.instance.id
+        }))
+    context={
+        'form':form
+    }
+    return render(request,'recuiter.html',context)
 ###################### Job single Post ###################
 
 def singlePost(request,id):
@@ -275,60 +340,65 @@ class PostLikeToggle(RedirectView):
 
 
 ################# __Edit Post__
-
-
-# @login_required
-# def updatepost(request,id):
-#     if request.user.is_authenticated:
-#         user=get_object_or_404(Author,user=request.user.id)
-#         post=get_object_or_404(Blogpost,id=id)
-#     form=CreatePostForm(request.POST or None , request.FILES or None , instance=post)
+@login_required
+def updatepost(request,id):
+    if request.user.is_authenticated:
+        user=get_object_or_404(RecruiterProfile,recruiter=request.user.id)
+        post=get_object_or_404(Blogpost,id=id)
+    form=userBlogPost(request.POST or None , request.FILES or None , instance=post)
     
-#     if request.method=='POST':
-#         if form.is_valid():
-#             instance=form.save(commit=False)
-#             instance.author=user
-#             instance.save()
+    if request.method=='POST':
+        if form.is_valid():
+            instance=form.save(commit=False)
+            instance.author=user
+            instance.save()
            
-#             return redirect(reverse("post" ,kwargs={
-#                 'id':form.instance.id
-#         }))
-#     context={
-#         'form':form
-#     }
-#     return render(request,'create_post.html',context)
+            return redirect(reverse("singlepost" ,kwargs={
+                'id':form.instance.id
+        }))
+    context={
+        'form':form
+    }
+    return render(request,'blogpost.html',context)
 
 
-###########_post_delete
+
+##########_post_delete
 
 
-# @login_required
-# def delete(request,id):
-#     post=get_object_or_404(Blogpost,id=id)
-#     user=get_object_or_404(Author,user=request.user.id)
+@login_required
+def delete(request,id):
+    post=get_object_or_404(Blogpost,id=id)
+    user=get_object_or_404(RecruiterProfile,recruiter=request.user.id)
     
-#     if user:
+    if user:
     
-#         post.delete()
+        post.delete()
 
-#     return redirect('blog')
+    return redirect('home')
+
+##########profile delete
 
 
+@login_required
+def profiledelete(request,id):
+    profile = get_object_or_404(CandidateProfile , id=id)
+    user=get_object_or_404(CandidateProfile,candidate=request.user.id)
+    
+    if user:
+    
+        profile.delete()
 
-# def search(request):
+    return redirect('home')
 
-#     search_post_list=Blogpost.objects.all()
-#     query= request.GET.get('text')
-#     if query:
-#         search_post_list= search_post_list.filter(
-#             Q(title__icontains=query) |
-#             Q(post__icontains=query)
-#         ).distinct()
-#         print(search_post_list)
-#     context={
 
-#         'post_list':search_post_list,
-        
-#     }
-#     return render(request,'result.html',context)
+@login_required
+def rprofiledelete(request,id):
+    profile = get_object_or_404(RecruiterProfile , id=id)
+    user=get_object_or_404(RecruiterProfile,recruiter=request.user.id)
+    
+    if user:
+    
+        profile.delete()
 
+    return redirect('home')
